@@ -1,0 +1,64 @@
+{
+ "reference_costs": {
+  "invsqrt": 2076774.233715282,
+  "dqi": 24439473914136.668,
+  "dfthcsos": 3355599588.3155365
+ },
+ "invsqrt": {
+  "file_sha256": "bce2948ff24e20fe59666d131f7fc4316a905103937272c52fdd39d494b6fe47",
+  "Q": 62,
+  "cost": 100568.5,
+  "ratio": 20.650345125116534,
+  "source": "public file (Ehan Mallick merges, distributed in Ozer vqcc-v18-portfolio); cost from its official run"
+ },
+ "dqi_893_public": {
+  "file_sha256": "fb2da4f299c4d41e421e5e57d07915599617291ab1c41d4e0fcefa6db1f2079c",
+  "Q": 893,
+  "T": 407444.06344726565,
+  "R": 1.1912604648115832,
+  "cost": 387059419542.2859,
+  "ratio": 63.1414007261143,
+  "source": "ahoirg qcc-reproducible-circuit-assets (SomeJoint q18 source + yoyobar carry), salt s1"
+ },
+ "dqi_892_ours": {
+  "file_sha256": "c453c7ac1bcce98ccf4d61c2881ccd23ac7db0e47fb31813a2e9fcdcd2390765",
+  "Q": 892,
+  "T": 407005.1521386719,
+  "R": 1.1912604648115832,
+  "cost": 385777011473.772,
+  "ratio": 63.35129670057659,
+  "static_toffoli": 482341,
+  "failures": {
+   "salt ''": 0,
+   "s1": 0,
+   "s2": 0
+  }
+ },
+ "chemistry_c40": {
+  "table_sha256": "893574424ea1b2d8ec2d90e3bd8e922dcbafde3aa4d569d70de129f75106ae60",
+  "lambda_eff": 47.09746378593682,
+  "Q": 428,
+  "public_loaders": {
+   "angle_toffoli_per_pass": 4748,
+   "T": 16237,
+   "cost": 327300810.34268564,
+   "ratio": 10.25234121724968
+  },
+  "our_loaders": {
+   "angle_toffoli_per_pass": 4503.0,
+   "T": 15747.0,
+   "cost": 317423530.23749894,
+   "ratio": 10.571363710197694
+  }
+ },
+ "score": {
+  "public_parts": 23.733121327364074,
+  "our_loaders_dqi893": 23.976779378489518,
+  "our_loaders_dqi892": 24.003318031765605,
+  "kaggle_public_lb": {
+   "our_loaders_dqi893": 23.97677,
+   "our_loaders_dqi892": 23.93,
+   "note": "Kaggle draws its own 102,400 DQI shots per submission. The 892 file had 2 failing shots there; each failing shot raises the repetition factor and costs about 0.45% of the DQI ratio (0.15% of the score)."
+  }
+ }
+}

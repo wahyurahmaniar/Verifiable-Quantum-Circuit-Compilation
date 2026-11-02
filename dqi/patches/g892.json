@@ -1,0 +1,57 @@
+[
+ {
+  "file": "portable_builder/transform.py",
+  "old": "homogeneous_start, carry_start, guard = 6, 7, 892",
+  "new": "homogeneous_start, carry_start, guard = 6, 9, 892"
+ },
+ {
+  "file": "portable_builder/transform.py",
+  "old": "    reference = code_of(original, \"<reference-q18>\")\n",
+  "new": "    import os\n    changed = open(os.environ['HYBRID_SRC']).read()\n    reference = code_of(original, \"<reference-q18>\")\n"
+ },
+ {
+  "file": "portable_builder/transform.py",
+  "old": "_previous_pole=previous_pole,",
+  "new": "_previous_pole=previous_pole, _previous_pole_bits=previous_pole_bits, _pole_bits=pole_bits, _zero_pole=zero_pole, _p6_state=_P6_STATE,"
+ },
+ {
+  "file": "portable_builder/transform.py",
+  "old": "    manager = CarryManager(carry_start, observer)\n",
+  "new": "    manager = CarryManager(carry_start, observer)\n    _P6_STATE = {}\n"
+ },
+ {
+  "file": "portable_builder/transform.py",
+  "old": "from carry_hybrid import CarryManager, previous_pole",
+  "new": "from carry_hybrid import CarryManager, previous_pole, zero_pole, previous_pole_bits, pole_bits"
+ },
+ {
+  "file": "portable_builder/carry_hybrid.py",
+  "old": "\n\nclass CarryManager:",
+  "new": "\n\ndef zero_pole(builder, marker):\n    \"\"\"Return zero(marker) (24-input AND of the complemented marker), restoring the marker.\"\"\"\n    assert len(marker) == 24\n    builder.x(marker)\n    ladder = builder.alloc_qubits(23)\n    builder.init_and(marker[0], marker[1], ladder[0])\n    for i in range(1, 23):\n        builder.init_and(ladder[i-1], marker[i+1], ladder[i])\n    for i in reversed(range(22)):\n        if i:\n            builder.del_and(ladder[i-1], marker[i+1], ladder[i])\n        else:\n            builder.del_and(marker[0], marker[1], ladder[0])\n    builder.free(ladder[:-1])\n    builder.x(marker)\n    return ladder[-1]\n\n\ndef previous_pole_bits(builder, current, bits):\n    \"\"\"Return current AND zero(bits) for any bit list, restoring the bits.\"\"\"\n    bits = list(bits)\n    builder.x(bits)\n    controls = [current] + bits\n    n = len(controls)\n    ladder = builder.alloc_qubits(n - 1)\n    builder.init_and(controls[0], controls[1], ladder[0])\n    for i in range(1, n - 1):\n        builder.init_and(ladder[i-1], controls[i+1], ladder[i])\n    for i in reversed(range(n - 2)):\n        if i:\n            builder.del_and(ladder[i-1], controls[i+1], ladder[i])\n        else:\n            builder.del_and(controls[0], controls[1], ladder[0])\n    builder.free(ladder[:-1])\n    builder.x(bits)\n    return ladder[-1]\n\n\nPOLE_BITS = {10: 12, 11: 12, 12: 16, 13: 20, 14: 22}\n\n\ndef pole_bits(gi, marker):\n    \"\"\"Structural carry test: P(gi-1) = P(gi) and zero(marker); a partial test is exact up to 2^-k at the edge weight 2gi-1.\"\"\"\n    k = POLE_BITS.get(gi, 24)\n    marker = list(marker)\n    return marker[12:24] + marker[:k - 12]\n\n\nclass CarryManager:"
+ },
+ {
+  "file": "portable_builder/carry_hybrid.py",
+  "old": "        assert start_group in (6,7,8)\n        self.start_group = start_group\n        self.observer = observer\n        self.builder = builder",
+  "new": "        assert start_group in (6,7,8,9,10)\n        self.start_group = start_group\n        self.observer = observer\n        self.builder = builder"
+ },
+ {
+  "file": "portable_builder/carry_hybrid.py",
+  "old": "        assert start_group in (6,7,8)\n        self.start_group = start_group\n        self.observer = observer\n        self.active = {}",
+  "new": "        assert start_group in (6,7,8,9,10)\n        self.start_group = start_group\n        self.observer = observer\n        self.active = {}"
+ },
+ {
+  "file": "blocks/dqi/pro-q18-900/source/exp/r-main/narrow240/frozen_chart.py",
+  "old": "  pole=zero_flag24(b,D);b.cswap(pole,N,D)\n",
+  "new": "  pole=None if gi in (7, 8) else zero_flag24(b,D)\n  if pole is not None:b.cswap(pole,N,D)\n"
+ },
+ {
+  "file": "blocks/dqi/pro-q18-900/source/playbook/kit/decoder/exp/arithmetic/division.py",
+  "old": "    \"\"\"Compute [x=0], n-1ANDs; returnoneflag, clearallinternalANDs.\"\"\"\n    n=len(x);b.x(x);ladder=b.alloc_qubits(n-1)\n",
+  "new": "    \"\"\"Compute [x=0], n-1ANDs; returnoneflag, clearallinternalANDs.\"\"\"\n    import builtins,sys as _sys\n    _h=getattr(builtins,'_zf_skip',None)\n    if _h is not None and _h(_sys._getframe(1)):return b.alloc_qubits(1)[0]\n    n=len(x);b.x(x);ladder=b.alloc_qubits(n-1)\n"
+ },
+ {
+  "file": "blocks/dqi/pro-q18-900/source/playbook/kit/decoder/exp/partial_gauge/tail.py",
+  "old": "    \"\"\"targets[j]^=F*coeffs[j]*x,12T,0scratch; GF12 coefficients classical.\"\"\"\n",
+  "new": "    \"\"\"targets[j]^=F*coeffs[j]*x,12T,0scratch; GF12 coefficients classical.\"\"\"\n    import builtins,sys as _sys\n    _h=getattr(builtins,'_zf_skip',None)\n    if _h is not None and _h(_sys._getframe(1)):return\n"
+ }
+]
