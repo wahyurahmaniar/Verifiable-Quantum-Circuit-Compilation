@@ -1,0 +1,26 @@
+qcc-portfolio
+Copyright 2026 the qcc-portfolio contributors
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party code and derived files
+
+third_party/mrmeows_planners/
+  Kernel planners by mrmeows (team selenium), copied unchanged from the Kaggle dataset
+  "QCC open circuits and sources" (mrmeows/qcc-1375-open-circuits). Apache License, Version 2.0.
+
+dqi/hybrid_g892.py
+  A modified version of external_node_chain from the q18 DQI source of Agniv Banerjee (SomeJoint)
+  and team (Apache License, Version 2.0), starting from the hybrid6 carry version built by ahoirg's
+  portable builder, which adapts yoyobar's one-carry patch. Changes by us: the group-6 pole flag is
+  measured in the forward pass and recomputed in the reverse of node 7; the carry bank starts at
+  group 9; the carry zero tests take a per-group number of marker bits.
+
+dqi/patches/g892.json, dqi/build_dqi_g892.patch
+  Edits applied at build time to files of the source bundle in ahoirg's dataset
+  "QCC Reproducible Circuit Assets" (ahoirg/qcc-reproducible-circuit-assets) and to its
+  build_dqi.py. They quote short context lines of those files. The bundle and the build
+  script themselves are not redistributed here.
+
+Inputs that are not included
+  Competition data (kickmix, verifiers), the DQI source bundle, the invsqrt circuit and the
+  C40 chemistry table keep their authors' terms. See README.md for their sources and SHA-256.

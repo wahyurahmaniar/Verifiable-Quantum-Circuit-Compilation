@@ -1,0 +1,12 @@
+# conda env create -f environment.yml && conda activate qcc
+name: qcc
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13      # the competition's kickmix.so is built for CPython 3.13
+  - numpy>=2.0
+  - scipy>=1.13
+  - matplotlib>=3.8  # only for scripts/make_ga.py
+  - psutil           # used by the DQI build script
+  - patch
+  - zip

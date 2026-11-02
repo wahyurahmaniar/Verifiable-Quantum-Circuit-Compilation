@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+build/
+*.kmb
+*.kmx
+*.zip
